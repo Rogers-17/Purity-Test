@@ -47,15 +47,15 @@ export default function TestPage() {
     const progress = ((current + 1) / questions.length ) * 100;
 
     return(
-        <div className="p-8 max-w-2xl mx-auto">
+        <div className="p-8 max-w-2xl mx-auto min-h-[90vh]">
             <div className="mb-6">
                 <ProgressBar progress={progress}/>
-                <p className="text-sm text-gray-600 mt-1 text-right">
+                <p className="text-sm text-white mt-1 text-right">
                     {current + 1} / {questions.length}
                 </p>
             </div>
-            <h2 className="text-2xl font-semibold mb-4">
-                Questions {current + 1}
+            <h2 className="text-2xl font-semibold mb-4 text-lime-400">
+                Question {current + 1}
             </h2>
             <p className="text-lg mb-8">{q.text}</p>
 

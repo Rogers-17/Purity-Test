@@ -24,7 +24,7 @@ export default function ResultPage () {
     else message = "You have lived your UNI life to the fullest"
 
     return (
-        <section className="flex flex-col items-center justify-center min-h-screen text-center p-8">
+        <section className="flex flex-col items-center justify-center min-h-[90vh] text-center p-8">
             <h1 className="text-3xl font-bold mb-4">Your Purity Score</h1>
             <p className="text-6xl font-extrabold text-lime-400 mb-4">
                 {score.toFixed(0)}%
