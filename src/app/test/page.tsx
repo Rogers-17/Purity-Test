@@ -54,7 +54,7 @@ export default function TestPage() {
                     {current + 1} / {questions.length}
                 </p>
             </div>
-            <h2 className="text-2xl font-semibold mb-4 text-lime-400">
+            <h2 className="text-2xl font-semibold mb-4 text-yellow-300">
                 Question {current + 1}
             </h2>
             <p className="text-lg mb-8">{q.text}</p>

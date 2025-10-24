@@ -21,7 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
     "border h-12 rounded-full px-6 font-medium transition focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants: Record<ButtonVariant, string> = {
-        primary: "bg-lime-400 text-neutral-950 border-lime-400",
+        primary: "bg-yellow-300 text-neutral-950 border-yellow-300 ",
         secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
         outline: "border-white text-white bg-transparent"
     };

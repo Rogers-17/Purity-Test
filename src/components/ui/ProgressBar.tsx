@@ -8,7 +8,7 @@ interface ProgressBarProps {
 export const ProgressBar: React.FC<ProgressBarProps> = ( {progress} ) => {
     return (
         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-            <div className="bg-lime-400 h-3 transition-all duration-500 ease-out"
+            <div className="bg-yellow-300 h-3 transition-all duration-500 ease-out"
             style={{ width: `${progress}%`}}
             />
         </div>

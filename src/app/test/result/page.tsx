@@ -26,7 +26,7 @@ export default function ResultPage () {
     return (
         <section className="flex flex-col items-center justify-center min-h-[90vh] text-center p-8">
             <h1 className="text-3xl font-bold mb-4">Your Purity Score</h1>
-            <p className="text-6xl font-extrabold text-lime-400 mb-4">
+            <p className="text-6xl font-extrabold text-yellow-300 mb-4">
                 {score.toFixed(0)}%
             </p>
             <p className="text-lg mb-6">{message}</p>
