@@ -42,7 +42,7 @@ Purity Test/
 ```bash
 git clone projectURL
 # This is done to get the project locally running on your PC
-cd puritytest
+cd purity-test-app
 # Changing directory to the main directory
 npm install 
 # After cloning, you need to install all dependecies in order to get started
