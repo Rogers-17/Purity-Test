@@ -19,8 +19,8 @@ export default function Homepage() {
         </span>
       </p>
 
-      <Link href="/test" className="mt-3 md:mt-4 lg:mt-6">
-        <Button variant="primary">Start Test</Button>
+      <Link href="/about" className="mt-3 md:mt-4 lg:mt-6">
+        <Button variant="primary">About</Button>
       </Link>
     </section>
   );
