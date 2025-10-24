@@ -41,7 +41,7 @@ export const Navbar = () => {
                     <ul className='flex flex-col items-center gap-2 mt-5 mx-5 text-lg font-bold'>
                         <Link onClick={() => setShowMobileMenu(false)} href="/" className='px-4 py-2 rounded-full inline-block'>HOME</Link>
                         <Link onClick={() => setShowMobileMenu(false)} href="/about" className='px-4 py-2 rounded-full inline-block'>ABOUT</Link>
-                        <Link onClick={() => setShowMobileMenu(false)} href="/start" className='px-4 py-2 rounded-full inline-block'>START</Link>
+                        <Link onClick={() => setShowMobileMenu(false)} href="/test" className='px-4 py-2 rounded-full inline-block'>START</Link>
                     </ul>
             </div>
             </div>
