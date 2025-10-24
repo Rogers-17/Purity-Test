@@ -6,8 +6,7 @@ const scoreMeaning = [
     { score: "70-89",  remark: "Balanced but adventurous", emoji: "🌲"},
     { score:"40-69",  remark: "You have seen things.....", emoji: "🔥"},
     { score: "1-39",  remark: "Just say 40-40 and we will understand", emoji: "😈"},
-]
-
+];
 
 export default function About () {
     return (
@@ -19,7 +18,7 @@ export default function About () {
 
                 <p className="text-lg leading-relaxed">
                     Welcome to <span className="font-bold text-yellow-300"> Student Purity Test</span>, a fun and totally unserious
-                    way to measure <em>how pure you've been</em> since stepping foot on sTARZ campus!
+                    way to measure <em>how pure you&apos;ve been</em> since stepping foot on STARZ campus!
                 </p>
 
                 <p className="text-lg leading-relaxed">
@@ -43,18 +42,17 @@ export default function About () {
                 <div className="space-y-3">
                     <h2 className="text-2xl font-bold text-yellow-300">The Inspiration</h2>
                     <p>
-                        At our university, technology is our passing 
+                        At our university, technology is our passion 
                         and education is our life. We commute daily, hang out at {" "}
                         <span className="font-bold text-yellow-300"> 40-40</span>, play games at the {" "}
                         <span className="font-bold text-yellow-300"> Invisible Sports Park</span>, and sometimes
                         end the night at <span className="font-bold text-yellow-300">Passion</span>.
-                        That's where the purity levels start to... fade. 😂
+                        That&apos;s where the purity levels start to... fade. 😂
                     </p>
                 </div>
 
                 <div className="pt-3">
-                    <Link 
-                    href="/test">
+                    <Link href="/test">
                         <Button>
                             START
                         </Button>
@@ -63,5 +61,4 @@ export default function About () {
             </section>
         </main>
     );
-
 }
