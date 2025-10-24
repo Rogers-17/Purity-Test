@@ -42,6 +42,7 @@ export default function TestPage() {
     };
 
     if (loading) return <Loader />
+    if (calculating) return <Loader/>
 
     const q = questions[current];
     const progress = ((current + 1) / questions.length ) * 100;
