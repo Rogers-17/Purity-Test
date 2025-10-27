@@ -40,7 +40,7 @@ Purity Test/
 ## Getting Started
 
 ```bash
-git clone projectURL
+git clone https://github.com/Rogers-17/Purity-Test.git
 # This is done to get the project locally running on your PC
 cd purity-test-app
 # Changing directory to the main directory
@@ -59,18 +59,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - **Main (`main`)** → production-ready branch
 - **Feature branches** → `feature/<name>`
+- **Refactor branches** → `refactor/<name>`
 - **Bugfix branches** → `fix/<name>`
 
 👉 Example:
 
 - `feature/authenctication`
+- `refactor/refacotor-layout-components`
 - `fix/display-result-bug`
 
 ### Commit Messages (Conventional Commits)
 
 - `feat(UI): add login form`
-- `fix(API): resolve student ID mismatch`
-- `refactor(DB): simplify user schema`
+- `fix(Bug): fix ESLint bugs`
+- `refactor(Component): simplify layout components`
 - `docs(README): update project overview`
 
 ### Rules of Thumb
