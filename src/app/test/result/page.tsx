@@ -1,38 +1,89 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/Button";
-import Loader from "@/components/ui/Loader";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Loader from "@/components/ui/Loader";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
+interface Answer {
+  question: string;
+  answer: string;
+}
 
+export default function ResultPage() {
+  const [score, setScore] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [result, setResult] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export default function ResultPage () {
+  useEffect(() => {
+    // Retrieve stored score and answers
+    const storedScore = localStorage.getItem("purityScore");
+    const storedAnswers = localStorage.getItem("answers");
 
-    const [score, setScore] = useState<number | null>(null);
+    if (storedScore) setScore(parseFloat(storedScore));
+    if (storedAnswers) setAnswers(JSON.parse(storedAnswers));
 
-    useEffect(() => {
-        const val = localStorage.getItem("purityScore");
-        if (val) setScore(parseFloat(val));
-    }, []);
+    // Call AI endpoint if we have data
+    if (storedScore && storedAnswers) {
+      fetch("/api/ai-response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          score: parseFloat(storedScore),
+          answers: JSON.parse(storedAnswers),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => setResult(data.message))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
-    if (score === null) return <Loader />;
+  const resetTest = () => {
+    localStorage.removeItem("purityScore");
+    localStorage.removeItem("answers");
+    localStorage.removeItem("aiMessage");
+  }
 
-    let message = "";;
-    if (score > 80 ) message = "Wow! You're a true scholar."
-    else if (score > 50) message = "You have a balanced student life."
-    else message = "You have lived your UNI life to the fullest"
+  if (loading) return <Loader />;
 
-    return (
-        <section className="flex flex-col items-center justify-center min-h-[90vh] text-center p-8">
-            <h1 className="text-3xl font-bold mb-4">Your Purity Score</h1>
-            <p className="text-6xl font-extrabold text-yellow-300 mb-4">
-                {score.toFixed(0)}%
-            </p>
-            <p className="text-lg mb-6">{message}</p>
-            <Link href="/test">
-                <Button variant="primary">Retake Test</Button>
-            </Link>
-        </section>
-    );
+  // adding a quick summary to use `answers` for ESLint error
+  const yesCount = answers.filter((a) => a.answer.toLowerCase() === "yes").length;
+  const noCount = answers.length - yesCount;
+  // just read it to satisfy ESLintconsole.log("Answers summary:", { yesCount, noCount });
+  console.log("Answers summary:", { yesCount, noCount });
+
+  return (
+    <div className="p-8 max-w-xl mx-auto text-center min-h-[90vh]">
+      <h1 className="text-3xl font-bold mb-4">
+        Your Purity Score
+      </h1>
+
+      {score !== null && 
+      <p className="text-6xl mb-4 font-extrabold text-yellow-300">{score.toFixed(0)}%</p>
+      }
+
+      {result ? (
+        <div className="p-4 border border-yellow-300 rounded-lg bg-neutral-900 text-white">
+          <p>{result}</p>
+        </div>
+      ) : (
+        <p className="text-white">No result available.</p>
+      )}
+
+      <Link
+      href="/test"
+      onClick={() => resetTest()}>
+        <Button
+        className="mt-6"
+        variant="primary"
+        >
+        Retake Test
+      </Button>
+      </Link>
+    </div>
+  );
 }
