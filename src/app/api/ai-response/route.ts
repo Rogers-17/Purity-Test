@@ -48,23 +48,23 @@ export async function POST(req: Request) {
     console.log("Response data:", data);
 
     // Handle blank or missing AI message
-    let aiMessage = data.choices?.[0]?.message?.content?.trim();
-    if (!aiMessage) {
-      if(score > 89 ) {
-        aiMessage = "You are an angel on campus, keep being that way"
-      }
-      if(score > 69 && score < 90 ) {
-        aiMessage = "You have a balanced student life but also adventurous. 😎"
-      }
-      if(score > 39 && score < 70){
-        aiMessage = "You are an angel on campus, keep being that way"
-      } else{
-        aiMessage = "Just say 40-40 and we will understand, you are a legend"
-      }
-    }
+    // aiMessage = data.choices[0]?.message?.content?.trim() || ;
+      let aiMessage = data?.choices?.[0]?.message?.content?.trim();
 
-    return NextResponse.json({ message: aiMessage });
-    
+      if (!aiMessage || aiMessage === "") {
+        if (score >= 90) {
+          aiMessage = "You're an angel on campus — focused, kind, and respected. 💎";
+        } else if (score >= 70) {
+          aiMessage = "You’ve got a balanced vibe — serious when needed but you know how to have fun. 🌿";
+        } else if (score >= 40) {
+          aiMessage = "You’ve seen some things... but you still keep it together. 🔥";
+        } else {
+          aiMessage = "Just say 40-40 and everyone will understand. You're a legend. 😎";
+        }
+      }
+    // console.log("🧠 Final message to send:", aiMessage);
+     return NextResponse.json({ message: aiMessage });
+
   } catch (error: unknown) {
     console.error("🔥 AI Error:", error);
     return NextResponse.json(
