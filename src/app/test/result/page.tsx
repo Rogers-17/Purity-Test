@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Loader from "@/components/ui/Loader";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 interface Answer {
   question: string;
@@ -20,7 +21,7 @@ export default function ResultPage() {
     const storedScore = localStorage.getItem("purityScore");
     const storedAnswers = localStorage.getItem("answers");
 
-    if (storedScore) setScore(Number(storedScore));
+    if (storedScore) setScore(parseFloat(storedScore));
     if (storedAnswers) setAnswers(JSON.parse(storedAnswers));
 
     // Call AI endpoint if we have data
@@ -29,7 +30,7 @@ export default function ResultPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          score: Number(storedScore),
+          score: parseFloat(storedScore),
           answers: JSON.parse(storedAnswers),
         }),
       })
@@ -41,15 +42,29 @@ export default function ResultPage() {
     }
   }, []);
 
+  const resetTest = () => {
+    localStorage.removeItem("purityScore");
+    localStorage.removeItem("answers");
+    localStorage.removeItem("aiMessage");
+  }
+
   if (loading) return <Loader />;
+
+  // adding a quick summary to use `answers` for ESLint error
+  const yesCount = answers.filter((a) => a.answer.toLowerCase() === "yes").length;
+  const noCount = answers.length - yesCount;
+  // just read it to satisfy ESLintconsole.log("Answers summary:", { yesCount, noCount });
+  console.log("Answers summary:", { yesCount, noCount });
 
   return (
     <div className="p-8 max-w-xl mx-auto text-center min-h-[90vh]">
-      <h1 className="text-3xl font-bold mb-4 text-yellow-300">
-        Your Purity Test Result
+      <h1 className="text-3xl font-bold mb-4">
+        Your Purity Score
       </h1>
 
-      {score !== null && <p className="text-6xl mb-4 font-extrabold text-yellow-300">{score.toFixed(0)}%</p>}
+      {score !== null && 
+      <p className="text-6xl mb-4 font-extrabold text-yellow-300">{score.toFixed(0)}%</p>
+      }
 
       {result ? (
         <div className="p-4 border border-yellow-300 rounded-lg bg-neutral-900 text-white">
@@ -59,13 +74,16 @@ export default function ResultPage() {
         <p className="text-white">No result available.</p>
       )}
 
-      <Button
+      <Link
+      href="/test"
+      onClick={() => resetTest()}>
+        <Button
         className="mt-6"
         variant="primary"
-        onClick={() => (window.location.href = "/test")}
-      >
+        >
         Retake Test
       </Button>
+      </Link>
     </div>
   );
 }

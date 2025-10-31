@@ -31,25 +31,27 @@ export default function TestPage() {
     };
 
    const handleCalculate = () => {
-  SetCalculating(true);
-  setTimeout(() => {
-    const total = questions.length;
-    const yesCount = Object.values(answers).filter((a) => a).length;
-    const purityScore = ((total - yesCount) / total) * 100;
+        SetCalculating(true);
+        setTimeout(() => {
+            const total = questions.length;
+            const yesCount = Object.values(answers).filter((a) => a).length;
+            const purityScore = ((total - yesCount) / total) * 100;
 
-    localStorage.setItem("purityScore", purityScore.toString());
+            // store score in the localstorage
+            localStorage.setItem("purityScore", purityScore.toString());
 
-    // Store answers as question text + answer
-    const formattedAnswers = questions.map((q, i) => ({
-      question: q.text,
-      answer: answers[i] ? "Yes" : "No",
-    }));
-    localStorage.setItem("answers", JSON.stringify(formattedAnswers));
-
-    window.location.href = "/test/result";
-  }, 1500);
-};
-
+            // Store answers as question text + answer
+            const formattedAnswers = questions.map((q, i) => ({
+            question: q.text,
+            answer: answers[i] ? "Yes" : "No",
+            }));
+            localStorage.setItem("answers", JSON.stringify(formattedAnswers));
+            // Redirecting after calculatin and storing answers/score
+            window.location.href = "/test/result";
+        }, 1500);
+    };
+    
+    // Setting loading state for each requests
     if (loading) return <Loader />
     if (calculating) return <Loader/>
 
@@ -70,10 +72,15 @@ export default function TestPage() {
             <p className="text-lg mb-8">{q.text}</p>
 
         <div className="flex gap-4">
-            <Button variant="primary" onClick={() => handleAnswer(true)}>
+            <Button 
+            variant="primary" 
+            onClick={() => handleAnswer(true)}>
                 Yes
             </Button>
-            <Button variant="outline" onClick={() => handleAnswer(false)}>
+            
+            <Button 
+            variant="outline" 
+            onClick={() => handleAnswer(false)}>
                 No
             </Button>
         </div>
